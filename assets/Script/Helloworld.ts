@@ -1,4 +1,4 @@
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Helloworld extends cc.Component {
@@ -9,8 +9,11 @@ export default class Helloworld extends cc.Component {
     @property
     text: string = 'hello';
 
-    start () {
+    start() {
         // init logic
         this.label.string = this.text;
+
+        let cfgman = require('CfgMan');
+        console.log(cfgman[1].name);  // 小明
     }
 }
