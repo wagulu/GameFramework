@@ -1,0 +1,12 @@
+{
+  "name": "proto",
+  "version": "0.0.1",
+  "description": "proto文件操作",
+  "author": "Clever",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/proto/create-message": {
+      "message": "proto:create-message"
+    }
+  }
+}

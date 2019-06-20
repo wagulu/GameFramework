@@ -19,5 +19,8 @@
   "homepage": "https://github.com/xiaocongcc/GameFramework#readme",
   "dependencies": {
     "@types/node": "^12.0.8"
+  },
+  "devDependencies": {
+    "protobufjs": "^5.0.3"
   }
 }

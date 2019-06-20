@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "base.proto";
+
+//@comment("登录",10000,"Login")
+message Login {
+    string cmd = 1;  
+    //登录名  
+    string name = 2;
+    // 密码
+    string pw = 3;
+    NUMBER_ARRAYS numbers = 4;
+    map<string,NUMBER_ARRAYS> data = 5;
+}
