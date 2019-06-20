@@ -17,7 +17,7 @@ let dirServerName = "server";
 
 let projectPath = Editor.Project.path;
 // 客户端存放配置表文件目录
-let clientJsPath = path.join(projectPath, "assets/script/JSConfig");
+let clientJsPath = path.join(projectPath, "assets/script/data/config");
 // 配置表输出目录
 let excelOutPutPath = 'plugins-excel/excel-output';
 

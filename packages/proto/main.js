@@ -249,7 +249,7 @@ var codeBodyFormat =
  */
 
 // proto插件main.js 252行可以修改
-import { CMessageBase, MessageRegister } from "./Net/Message";
+import { CMessageBase, MessageRegister } from "./protobuf/Message";
 
 /**协议文件 */
 export let ProtoFile = [
