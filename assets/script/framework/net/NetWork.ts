@@ -1,4 +1,6 @@
-import { SocketState, ISocket, WxSocket, WbSocket } from "./Socket";
+import { ISocket, SocketState, WxSocket, WbSocket } from "./Socket";
+import EventMng from "../event/EventMng";
+import { CEventName } from "../../data/CEventName";
 import { MessageRegister } from "../../protobuf/Message";
 
 const DATA_TOTAL_LEN = 4;	//数据总长度
@@ -44,6 +46,7 @@ export class NetWork implements ISocketDelegate {
 
     onSocketOpen() {
         console.log('socket open');
+        EventMng.emit(CEventName.SOCKET_OPEN);
     }
 
     onSocketError(errMsg) {
@@ -56,6 +59,7 @@ export class NetWork implements ISocketDelegate {
             this._socket.close();
         }
         this._socket = null;
+        EventMng.emit(CEventName.SOCKET_CLOSE);
     }
 
     onSocketMessage(data: string | ArrayBuffer) {
