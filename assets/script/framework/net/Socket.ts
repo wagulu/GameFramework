@@ -1,4 +1,5 @@
 import { ISocketDelegate } from "./SocketDelegate";
+import { Log } from "../log/Log";
 
 export enum SocketState {
     CONNECTING = 1,
@@ -28,11 +29,11 @@ export class WbSocket implements ISocket {
     }
 
     connect() {
-        console.log('websocket connect to ' + this._url);
-
         let ws = this._webSocket = new WebSocket(this._url);
         ws.binaryType = 'arraybuffer';  // 默认为blob，这里要改为arraybuffer
-        ws.onopen = this._delegate.onSocketOpen.bind(this._delegate);
+        ws.onopen = (event) => {
+            this._delegate.onSocketOpen();
+        };
         ws.onmessage = (event) => {
             this._delegate.onSocketMessage(event.data);
         };
@@ -49,7 +50,6 @@ export class WbSocket implements ISocket {
      * @param data {string | ArrayBuffer}
      */
     send(data: string | ArrayBuffer) {
-        console.log('websocket send = ', data);
         this._webSocket.send(data);
     }
 
@@ -60,7 +60,7 @@ export class WbSocket implements ISocket {
         try {
             this._webSocket.close();
         } catch (err) {
-            console.log('error while closing webSocket ', err.toString());
+            Log.error('error while closing webSocket ', err.toString());
         }
         this._webSocket = null;
     }
@@ -97,7 +97,6 @@ export class WxSocket implements ISocket {
     }
 
     connect() {
-        console.log('wxsocket connect to ' + this._url);
         this._state = SocketState.CONNECTING;
 
         let ws = this._socketTask = wx.connectSocket({
@@ -124,7 +123,6 @@ export class WxSocket implements ISocket {
      * @param data {string/ArrayBuffer}
      */
     send(data: string | ArrayBuffer) {
-        console.log('wxsocket send = ', data);
         this._socketTask.send({
             data: data
         });
@@ -138,7 +136,7 @@ export class WxSocket implements ISocket {
         try {
             this._socketTask.close();
         } catch (err) {
-            console.log('error while closing webSocket ', err);
+            Log.error('error while closing webSocket ', err);
         }
         this._socketTask = null;
     }

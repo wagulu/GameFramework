@@ -1,4 +1,5 @@
 import { SocketDelegate } from "./SocketDelegate";
+import { Log } from "../log/Log";
 
 export class Network {
     private _socket: SocketDelegate = null;
@@ -14,7 +15,7 @@ export class Network {
 
     send(msg) {
         if (!this._socket.isSocketOpened()) {
-            console.error('send message but socket not open!')
+            Log.error('send message but socket not open!')
             return;
         }
         this._socket.send(msg);

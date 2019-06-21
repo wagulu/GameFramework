@@ -14,3 +14,11 @@
 ## UI模块
 
 [UI模块](./doc/UI模块.md)
+
+## 事件分发
+
+这里直接new cc.EventTarget。
+
+## 日志模块
+
+[日志模块](./doc/日志模块.md)

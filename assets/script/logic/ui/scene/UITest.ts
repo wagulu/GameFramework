@@ -6,6 +6,7 @@ import { CEventName } from "../../../data/CEventName";
 import { Login } from "../../../ProtoMessage";
 import ProtoLoader from "../../../protobuf/ProtoLoader";
 import { Network } from "../../../framework/net/Network";
+import { Log, LOG_TAG } from "../../../framework/log/Log";
 
 const { ccclass, menu, property } = cc._decorator;
 

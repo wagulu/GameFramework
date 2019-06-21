@@ -2,6 +2,7 @@ import { CEventName } from "../../data/CEventName";
 import { MessageRegister } from "../../protobuf/Message";
 import EventMng from "../event/EventMng";
 import { ISocket, SocketState, WbSocket, WxSocket } from "./Socket";
+import { Log, LOG_TAG } from "../log/Log";
 
 const DATA_TOTAL_LEN = 4;	//数据总长度
 const PROTOCOLTYPE_LEN = 4;	//协议号长度
@@ -28,7 +29,7 @@ export class SocketDelegate implements ISocketDelegate {
     }
 
     connect(url: string) {
-        console.log('connect socket = ' + url);
+        Log.log(LOG_TAG.SOCKET, 'connect socket = ' + url);
         // 根据平台创建socket
         if (cc.sys.platform === cc.sys.WECHAT_GAME) {
             this._socket = new WxSocket(url, this);
@@ -45,16 +46,16 @@ export class SocketDelegate implements ISocketDelegate {
     }
 
     onSocketOpen() {
-        console.log('socket open');
+        Log.log(LOG_TAG.SOCKET, 'socket open');
         EventMng.emit(CEventName.SOCKET_OPEN);
     }
 
     onSocketError(errMsg) {
-        errMsg && console.error('socket error, msg = ' + errMsg);
+        errMsg && Log.error('socket error, msg = ' + errMsg);
     }
 
     onSocketClosed(msg: string) {
-        console.log('socket close, reason = ' + msg);
+        Log.log(LOG_TAG.SOCKET, 'socket close, reason = ' + msg);
         if (this._socket) {
             this._socket.close();
         }
@@ -64,7 +65,7 @@ export class SocketDelegate implements ISocketDelegate {
 
     onSocketMessage(data: string | ArrayBuffer) {
         if (this.isSocketClosed()) {
-            console.error('onMessage call but socket had closed')
+            Log.error('onMessage call but socket had closed')
             return;
         }
         let msg;
@@ -73,7 +74,7 @@ export class SocketDelegate implements ISocketDelegate {
         } else {
             msg = this.bufferToMsg(data);
         }
-        console.log('recieve msg = ', msg);
+        Log.log(LOG_TAG.SOCKET, 'recieve msg = ', msg);
     }
 
     send(msg) {
