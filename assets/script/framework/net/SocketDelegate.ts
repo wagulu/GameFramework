@@ -1,7 +1,7 @@
-import { ISocket, SocketState, WxSocket, WbSocket } from "./Socket";
-import EventMng from "../event/EventMng";
 import { CEventName } from "../../data/CEventName";
 import { MessageRegister } from "../../protobuf/Message";
+import EventMng from "../event/EventMng";
+import { ISocket, SocketState, WbSocket, WxSocket } from "./Socket";
 
 const DATA_TOTAL_LEN = 4;	//数据总长度
 const PROTOCOLTYPE_LEN = 4;	//协议号长度
@@ -16,7 +16,7 @@ export interface ISocketDelegate {
 /**
  * 实现socket各个回调接口
  */
-export class NetWork implements ISocketDelegate {
+export class SocketDelegate implements ISocketDelegate {
     private _socket: ISocket;
 
     isSocketOpened() {
