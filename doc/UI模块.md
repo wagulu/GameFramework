@@ -2,11 +2,11 @@
 
 ## 目录结构
 
-- UIMng：UI管理器，用于打开、关闭UI
+- `UIMng`：UI管理器，用于打开、关闭UI
 
-- UIBase：UI界面基类，在这里可以定义一些通用方法，供子类调用或者继承
+- `UIBase`：UI界面基类，在这里可以定义一些通用方法，供子类调用或者继承
 
-- UIHelp：UI工具类，封装一系列UI相关的功能方法
+- `UIHelp`：UI工具类，封装一系列UI相关的功能方法
 
 ---  
 
@@ -16,7 +16,7 @@
 
 2.选中，然后到工具栏:扩展->auto-ui
 
-export操作是将节点树的结构自动导出到ts文件
+`export操作`是将节点树的结构自动导出到ts文件
 
 ```typescript
 let parent = this.node.getParent();
@@ -25,7 +25,7 @@ this.background = this.Canvas.getChildByName("background");
 this.btnNotice = this.Canvas.getChildByName("btnNotice");
 ```
 
-create-script操作是自动生成UI模块ts文件
+`create-script操作`是自动生成UI模块ts文件
 
 以后，你想要使用ui节点，就不需要各种getChildByName，或者搞个property在编辑器拖，所有的节点都导出在一个ts文件，然后作为一个组件添加到UI文件中，你只需要this.ui[节点名称]即可访问。
 

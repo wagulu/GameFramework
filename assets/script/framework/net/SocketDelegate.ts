@@ -77,10 +77,6 @@ export class SocketDelegate implements ISocketDelegate {
     }
 
     send(msg) {
-        if (!this.isSocketOpened()) {
-            console.error('send message but socket not open!')
-            return;
-        }
         if (typeof (msg) === 'string') {
             this._socket.send(msg);
         } else {

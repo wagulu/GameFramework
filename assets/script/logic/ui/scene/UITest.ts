@@ -2,10 +2,10 @@ import auto_Test from "../../../Data/AutoUI/scene/auto_Test";
 import UIBase from "../../../framework/ui/UIBase";
 import UIHelp from "../../../framework/ui/UIHelp";
 import UINotice from "../notice/UINotice";
-import { NetWork } from "../../../framework/net/NetWork";
 import { CEventName } from "../../../data/CEventName";
 import { Login } from "../../../ProtoMessage";
 import ProtoLoader from "../../../protobuf/ProtoLoader";
+import { Network } from "../../../framework/net/Network";
 
 const { ccclass, menu, property } = cc._decorator;
 
@@ -17,7 +17,7 @@ export default class UITest extends UIBase {
 	protected static prefabUrl = "db://a";
 	protected static className = "UITest";
 
-	private _network: NetWork;
+	private _network: Network;
 
 	onUILoad() {
 		this.ui = this.node.addComponent(auto_Test);
@@ -41,9 +41,7 @@ export default class UITest extends UIBase {
 
 	onConnectNetwork() {
 		// 创建连接
-		this._network = new NetWork();
-		let url = 'ws://localhost:3000';
-		this._network.connect(url);
+		this._network = new Network();
 	}
 
 	onSendMsg() {

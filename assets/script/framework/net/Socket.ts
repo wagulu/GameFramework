@@ -1,4 +1,4 @@
-import { ISocketDelegate } from "./NetWork";
+import { ISocketDelegate } from "./SocketDelegate";
 
 export enum SocketState {
     CONNECTING = 1,
