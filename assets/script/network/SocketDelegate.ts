@@ -1,4 +1,4 @@
-import { EventName } from "../data/const/EventName";
+import { SocketEvent } from "../data/const/EventConst";
 import { MessageRegister } from "./Message";
 import EventMng from "../manager/EventMng";
 import { ISocket, SocketState, WbSocket, WxSocket } from "./Socket";
@@ -47,7 +47,7 @@ export class SocketDelegate implements ISocketDelegate {
 
     onSocketOpen() {
         Log.log(LOG_TAG.SOCKET, 'socket open');
-        EventMng.emit(EventName.SOCKET_OPEN);
+        EventMng.emit(SocketEvent.SOCKET_OPEN);
     }
 
     onSocketError(errMsg) {
@@ -60,7 +60,7 @@ export class SocketDelegate implements ISocketDelegate {
             this._socket.close();
         }
         this._socket = null;
-        EventMng.emit(EventName.SOCKET_CLOSE);
+        EventMng.emit(SocketEvent.SOCKET_CLOSE);
     }
 
     onSocketMessage(data: string | ArrayBuffer) {
@@ -74,7 +74,8 @@ export class SocketDelegate implements ISocketDelegate {
         } else {
             msg = this.bufferToMsg(data);
         }
-        Log.log(LOG_TAG.SOCKET, 'recieve msg = ', msg);
+        // Log.log(LOG_TAG.SOCKET, 'recieve msg = ', msg);
+        EventMng.emit(msg.messageName, msg);
     }
 
     send(msg) {
@@ -88,7 +89,7 @@ export class SocketDelegate implements ISocketDelegate {
 
     /**
      * buffer转msg，解包用
-     * 协议格式：总字节数（4个字节，总字节数=协议号字节数+数据长度） + 协议号（4个字节） + 数据长度
+     * 协议格式：总字节数（4个字节，总字节数=协议号字节数+数据长度） + 协议号（4个字节） + 数据
      * @param recvBuf 
      */
     private bufferToMsg(recvBuf: ArrayBuffer) {
@@ -102,7 +103,7 @@ export class SocketDelegate implements ISocketDelegate {
 
     /**
      * msg转buffer，封包用
-     * 协议格式：总字节数（4个字节，总字节数=协议号字节数+数据长度） + 协议号（4个字节） + 数据长度
+     * 协议格式：总字节数（4个字节，总字节数=协议号字节数+数据长度） + 协议号（4个字节） + 数据
      * @param msg 
      */
     private msgToBuffer(msg) {

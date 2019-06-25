@@ -34,11 +34,11 @@ export class NUMBER_ARRAYS extends CMessageBase {
 MessageRegister.registerClass(-1, NUMBER_ARRAYS);
    
 /**登录 */
-export class Login extends CMessageBase {
+export class C2G_Login extends CMessageBase {
     constructor (databuff = null) {
         super();
         this.protocolType = 10000;
-        this.messageName = 'Login';
+        this.messageName = 'C2G_Login';
         this.initMsgObj(databuff);
     }
 
@@ -65,22 +65,25 @@ export class Login extends CMessageBase {
     get pw () : string {
         return this.msgObj.pw;
     }
+}
+MessageRegister.registerClass(10000, C2G_Login);
+   
+/**登录返回 */
+export class G2C_Login extends CMessageBase {
+    constructor (databuff = null) {
+        super();
+        this.protocolType = 10001;
+        this.messageName = 'G2C_Login';
+        this.initMsgObj(databuff);
+    }
 
     /**undefined */
-    set numbers (param : NUMBER_ARRAYS) {
-        this.msgObj.numbers = param;
+    set msg (param : string) {
+        this.msgObj.msg = param;
     }
-    get numbers () : NUMBER_ARRAYS {
-        return this.msgObj.numbers;
-    }
-
-    /**undefined */
-    set data (param : Map<string,NUMBER_ARRAYS>) {
-        this.msgObj.data = param;
-    }
-    get data () : Map<string,NUMBER_ARRAYS> {
-        return this.msgObj.data;
+    get msg () : string {
+        return this.msgObj.msg;
     }
 }
-MessageRegister.registerClass(10000, Login);
+MessageRegister.registerClass(10001, G2C_Login);
 

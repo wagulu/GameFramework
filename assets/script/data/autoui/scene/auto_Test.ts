@@ -9,6 +9,7 @@ export default class auto_Test extends cc.Component {
 	Canvas: cc.Node;
 	background: cc.Node;
 	btnNetwork: cc.Node;
+	btnLogin: cc.Node;
 	btnUI: cc.Node;
 	public static URL:string = "db://assets/scene/Test.fire"
 
@@ -19,6 +20,7 @@ export default class auto_Test extends cc.Component {
 		this.Canvas = parent.getChildByName("Canvas");
 		this.background = this.Canvas.getChildByName("background");
 		this.btnNetwork = this.Canvas.getChildByName("btnNetwork");
+		this.btnLogin = this.Canvas.getChildByName("btnLogin");
 		this.btnUI = this.Canvas.getChildByName("btnUI");
 
 	}

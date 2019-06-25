@@ -1,4 +1,5 @@
 import EventMng from "../../manager/EventMng";
+import GameController from "../../GameController";
 
 export default class IDataModel {
     protected modelName: string = 'default';
@@ -46,7 +47,7 @@ export default class IDataModel {
      */
     sendProtocolMsg(msg) {
         try {
-            // DataCenter.socketMgr.Send(msg);
+            GameController.network.send(msg);
         } catch (e) {
             console.error('send proto', msg, e);
         }
