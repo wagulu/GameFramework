@@ -1,6 +1,6 @@
 import auto_notice from "../../../Data/AutoUI/notice/auto_notice";
-import UIBase from "../../../framework/ui/UIBase";
-import UIHelp from "../../../framework/ui/UIHelp";
+import UIBase from "../UIBase";
+import UIHelp from "../../../utils/UIHelp";
 
 const { ccclass, menu, property } = cc._decorator;
 

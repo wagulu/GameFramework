@@ -5,7 +5,7 @@
  */
 
 // proto插件main.js 252行可以修改
-import { CMessageBase, MessageRegister } from "./protobuf/Message";
+import { CMessageBase, MessageRegister } from "./network/Message";
 
 /**协议文件 */
 export let ProtoFile = [

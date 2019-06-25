@@ -1,12 +1,12 @@
 import auto_Test from "../../../Data/AutoUI/scene/auto_Test";
-import UIBase from "../../../framework/ui/UIBase";
-import UIHelp from "../../../framework/ui/UIHelp";
-import UINotice from "../notice/UINotice";
-import { CEventName } from "../../../data/CEventName";
+import { EventName } from "../../../data/const/EventName";
+import { Network } from "../../../network/Network";
+import ProtoLoader from "../../../network/ProtoLoader";
 import { Login } from "../../../ProtoMessage";
-import ProtoLoader from "../../../protobuf/ProtoLoader";
-import { Network } from "../../../framework/net/Network";
-import { Log, LOG_TAG } from "../../../framework/log/Log";
+import UIHelp from "../../../utils/UIHelp";
+import UINotice from "../notice/UINotice";
+import UIBase from "../UIBase";
+import GameController from "../../../GameController";
 
 const { ccclass, menu, property } = cc._decorator;
 
@@ -18,8 +18,6 @@ export default class UITest extends UIBase {
 	protected static prefabUrl = "db://a";
 	protected static className = "UITest";
 
-	private _network: Network;
-
 	onUILoad() {
 		this.ui = this.node.addComponent(auto_Test);
 	}
@@ -28,7 +26,7 @@ export default class UITest extends UIBase {
 		this.onRegisterEvent(this.ui.btnNetwork, this.onConnectNetwork, this);
 		this.onRegisterEvent(this.ui.btnUI, this.onOpenUI, this);
 
-		this.initEvent(CEventName.SOCKET_OPEN, this.onSendMsg);
+		this.initEvent(EventName.SOCKET_OPEN, this.onSendMsg);
 	}
 
 	onHide() {
@@ -38,23 +36,23 @@ export default class UITest extends UIBase {
 
 	onStart() {
 		ProtoLoader.load();
+		GameController.initModule();
 	}
 
 	onConnectNetwork() {
-		// 创建连接
-		this._network = new Network();
+		GameController.network.connect();
 	}
 
 	onSendMsg() {
 		UIHelp.ShowTips('连接成功，开始发送信息');
 
-		this._network.send('Hello');
+		GameController.network.send('Hello');
 
 		let login = new Login();
 		login.cmd = 'login';
 		login.name = 'Clever';
 		login.pw = '123456';
-		this._network.send(login);
+		GameController.network.send(login);
 	}
 
 	onOpenUI() {
